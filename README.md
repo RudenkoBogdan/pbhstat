@@ -83,7 +83,7 @@ ps_custom = PowerSpectrum(
 )
 ```
 
-**Alternatively, use a built-in piecewise spectrum:**
+**Alternatively, use a built-in piecewise spectrum, choose from 'piecewise', 'flat', 'lognormal' or 'delta':**
 
 ```python
 k_values = np.logspace(3, 7, 3000)
@@ -100,6 +100,8 @@ ps_piecewise = PowerSpectrum(
 
 ### 3. Instantiate Mass Variance
 
+**choose a window function from 'realtophat' or 'gaussian' and statistical method from 'press', 'peaks' or 'nonlinear':**
+
 ```python
 mv_piecewise = MassVariance(
     window='realtophat',
@@ -110,6 +112,8 @@ mv_piecewise = MassVariance(
 ```
 
 ### 4. Evaluate Mass Function
+
+**choose same statistical method as above and specify optional numerical coefficients:**
 
 ```python
 mass_function = MassFunction(
@@ -138,9 +142,9 @@ plot_mass_function(mpbh, f_mpbh, fpbh_val=fpbh)
 
 ## 📈 Plotting Constraints with PBHbounds
 
-To overlay your calculated mass function with observational constraints, use the PBHbounds repository.
+To overlay your calculated mass function with observational constraints, use the [PBHbounds](https://github.com/bradkav/PBHbounds/tree/master) repository.
 
-**Save your mass function to the PBHbounds directory:**
+**Save your mass function to the location of your PBHbounds directory:**
 
 ```python
 from pbhstat.plot_utils import bounds_utility
@@ -149,7 +153,7 @@ bounds_utility(mpbh, f_mpbh, 'path_to_PBHbounds_directory')
 
 Then run the modified script `PlotPBHbounds.py` from within that directory (available [here](https://github.com/pipcole/pbhstat)).
 
-**Note:** Overlaying extended mass functions on monochromatic constraints is only an approximation. This utility is best suited to narrow mass functions. For consistent constraint conversion, see: Bellomo et al., 2017.
+**Note:** Overlaying extended mass functions on monochromatic constraints is not consistent and should only be used as a guide for narrow mass functions. For consistent constraint conversion, see e.g. Bellomo et al. [arXiv:1709.07467](https://arxiv.org/abs/1709.07467).
 
 ## 📚 Reference
 

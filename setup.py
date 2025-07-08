@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'pbhstat',
   packages = ['pbhstat'],
-  version = '0.1',
+  version = '0.0.1',
   license='MIT',
   description = 'A Python code for calculating the primordial black hole mass function and abundance.',
   author = 'Philippa Cole and Jacopo Fumagalli',

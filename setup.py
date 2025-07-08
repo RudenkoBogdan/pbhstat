@@ -13,7 +13,7 @@ setup(
   install_requires=[            # I get to this in a second
           'numpy',
           'scipy',
-          'matplotlib'
+          'matplotlib',
           'tqdm',
       ],
   classifiers=[

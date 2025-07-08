@@ -8,7 +8,7 @@ setup(
   author = 'Philippa Cole and Jacopo Fumagalli',
   author_email = 'philippa.cole@unimib.it',
   url = 'https://github.com/pipcole/pbhstat',
-  download_url = 'https://github.com/pipcole/pbhstat/archive/refs/tags/v.0.0.1-beta.tar.gz',
+  download_url = 'https://github.com/pipcole/pbhstat/archive/refs/tags/v.0.0.1.tar.gz',
   keywords = ['PBH', 'abundance', 'mass function'],
   install_requires=[            # I get to this in a second
           'numpy',

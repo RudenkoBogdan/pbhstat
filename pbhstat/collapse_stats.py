@@ -2,9 +2,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 import tqdm
 
-from constants import OmegaCDM, Meq, req, geq
+from .constants import OmegaCDM, Meq, req, geq
 
-from stats_utils import (
+from .stats_utils import (
     C, fs, initialize_gcf, gamma_f, barg, sigmawtildef, bargfull,
     Sigmagf, Mmax, find_peak_range_indices
 )

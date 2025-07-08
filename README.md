@@ -16,11 +16,10 @@ Alternatively, you can clone the repository directly from GitHub for development
 git clone https://github.com/pipcole/pbhstat.git
 ```
 
-If using the code this way, ensure that the following Python dependencies are installed manually:
-- numpy
-- scipy
-- matplotlib
-- tqdm
+and then run 
+```bash
+pip install -e .
+```
 
 ## 🖥️ Compatibility
 

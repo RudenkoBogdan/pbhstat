@@ -4,7 +4,7 @@ from scipy.integrate import simpson
 from .collapse_stats import PressSchechterModel, PeaksTheoryModel, NonLinearModel
 
 class MassFunction:
-    #def __init__(self, power_spectrum, mass_variance, statistics, K=10, C_c=0.25, gamma=0.36):
+    #def __init__(self, power_spectrum, mass_variance, statistics, K=10, g_c=0.25, gamma=0.36):
      #3   """
        # statistics: an instance of a statistics model class (e.g. PressSchechterModel),
         #"""

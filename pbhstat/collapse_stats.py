@@ -10,23 +10,23 @@ from .stats_utils import (
 )
 
 class PressSchechterModel:
-    def __init__(self, power_spectrum, mass_variance, K, C_c, gamma=0.36):
+    def __init__(self, power_spectrum, mass_variance, K, g_c, gamma=0.36):
         self.power_spectrum = power_spectrum
         self.mass_variance = mass_variance
         self.K = K
         self.gamma = gamma
-        self.C_c = C_c
+        self.g_c = g_c
 
-        if self.mass_variance.window == 'gaussian' and (K != 10 or C_c != 0.28):
-            print('Warning: Gaussian window function typically uses K=10 and C_c=0.28')
-        if self.mass_variance.window == 'realtophat' and (K != 4 or C_c != 0.77):
-            print('Warning: Top hat window function typically uses K=4 and C_c=0.77')
+        if self.mass_variance.window == 'gaussian' and (K != 10 or g_c != 0.28):
+            print('Warning: Gaussian window function typically uses K=10 and g_c=0.28')
+        if self.mass_variance.window == 'realtophat' and (K != 4 or g_c != 0.77):
+            print('Warning: Top hat window function typically uses K=4 and g_c=0.77')
 
     def mu(self, mh, mbh):
         return mbh / (self.K * mh)
 
     def C(self, mh, mbh):
-        return self.mu(mh, mbh) ** (1 / self.gamma) + self.C_c
+        return self.mu(mh, mbh) ** (1 / self.gamma) + self.g_c
 
     def P(self, C_val, sigma_sq):
         return (1 / np.sqrt(2 * np.pi * sigma_sq)) * np.exp(-C_val**2 / (2 * sigma_sq))
@@ -60,17 +60,17 @@ class PressSchechterModel:
         return MPBH, fm_vals
 
 class PeaksTheoryModel:
-    def __init__(self, power_spectrum, mass_variance, K, C_c, gamma=0.36):
+    def __init__(self, power_spectrum, mass_variance, K, g_c, gamma=0.36):
         self.power_spectrum = power_spectrum
         self.mass_variance = mass_variance
         self.K = K
         self.gamma = gamma
-        self.C_c = C_c
+        self.g_c = g_c
 
-        if mass_variance.window == 'gaussian' and (K != 10 or C_c != 0.28):
-            print('Warning: Gaussian window function usually takes K=10, C_c=0.28')
-        if self.mass_variance.window == 'realtophat' and (K != 4 or C_c != 0.77):
-            print('Warning: Top hat window function typically uses K=4 and C_c=0.77')
+        if mass_variance.window == 'gaussian' and (K != 10 or g_c != 0.28):
+            print('Warning: Gaussian window function usually takes K=10, g_c=0.28')
+        if self.mass_variance.window == 'realtophat' and (K != 4 or g_c != 0.77):
+            print('Warning: Top hat window function typically uses K=4 and g_c=0.77')
 
     def evaluate(self, k_values, mpbh_vals):
         sigma0f, sigma1f = self.mass_variance.evaluate(k_values)
@@ -89,7 +89,7 @@ class PeaksTheoryModel:
             return mbh / (self.K * mh)
 
         def C(mh, mbh):
-            return mu(mh, mbh)**(1 / self.gamma) + self.C_c
+            return mu(mh, mbh)**(1 / self.gamma) + self.g_c
 
         def nu(mh, mbh, sig0):
             R = np.sqrt(mh / Meq) * req

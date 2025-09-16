@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
   name = 'pbhstat',
   packages = ['pbhstat'],
-  version = '0.0.3',
+  version = '0.0.4',
   license='MIT',
   description = 'A Python code for calculating the primordial black hole mass function and abundance.',
   author = 'Philippa Cole and Jacopo Fumagalli',
   author_email = 'philippa.cole@unimib.it',
   url = 'https://github.com/pipcole/pbhstat',
-  download_url = 'https://github.com/pipcole/pbhstat/archive/refs/tags/v.0.0.3.tar.gz',
+  download_url = 'https://github.com/pipcole/pbhstat/archive/refs/tags/v.0.0.4.tar.gz',
   keywords = ['PBH', 'abundance', 'mass function'],
   install_requires=[
           'numpy',

@@ -18,6 +18,7 @@ git clone https://github.com/pipcole/pbhstat.git
 
 and then run 
 ```bash
+cd pbhstat
 pip install -e .
 ```
 

@@ -70,6 +70,7 @@ def plot_mass_function(m_vals, f_m_vals, fpbh_val = None):
     ax.loglog(m_vals, f_m_vals, label=r"$f_{\rm PBH}(M)$", color="crimson", lw=2)
 
     # Set limits
+    ax.set_ylim(np.min(m_vals), np.max(m_vals))
     #ax.set_ylim(1e-5, 1)
 
     # Axis labels and title

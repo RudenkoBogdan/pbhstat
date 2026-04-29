@@ -11,44 +11,45 @@ def Erf(x):
 
 # Initialize gcf
 def initialize_gcf(wmax, simple=False):
-    qq = np.geomspace(0.0001, wmax, 10000)
-
-    def th(q):
-        hyp = hyp2f1(1, 5 / (2 + 2 * q), 1 + 5 / (2 + 2 * q), -1 / q)
-        return np.clip(2 * q / ((3 * (1 + q)) * hyp), 0, 1)
-
-    th_vals = th(qq)
-    def wq(q, th_vals):
-        return q * th_vals * 4 * np.sqrt(1 - 3 / 2 * th_vals)
-
-    wq_vals = wq(qq, th_vals)
-    
-    _, unique_indices = np.unique(wq_vals, return_index=True)
-
-    sort_idx = np.argsort(wq_vals[unique_indices])
-    unique_idx = unique_indices[sort_idx]
-
-    wq_unique = wq_vals[unique_idx]
-    qq_unique = qq[unique_idx]
-
-    wqf = interp1d(qq_unique, wq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
-    qw = interp1d(wq_unique, qq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
-
     ww = np.geomspace(0.0001, wmax, 10000)
 
-    def gc(w, qw):
-        q_vals = qw(w)
-        th_vals = th(q_vals)
-        y = 4/3 * (1 - np.sqrt(1 - 3/2 * th_vals))
-        y2 = 4/3 - 32/9 * 1/w
-        return np.where(w < 1e4, y, y2)
-
-    def gc_simple(w):
-        return 0.63 * w ** 0.2
-
     if simple == False:
+        qq = np.geomspace(0.0001, wmax, 10000)
+    
+        def th(q):
+            hyp = hyp2f1(1, 5 / (2 + 2 * q), 1 + 5 / (2 + 2 * q), -1 / q)
+            return np.clip(2 * q / ((3 * (1 + q)) * hyp), 0, 1)
+    
+        th_vals = th(qq)
+        def wq(q, th_vals):
+            return q * th_vals * 4 * np.sqrt(1 - 3 / 2 * th_vals)
+    
+        wq_vals = wq(qq, th_vals)
+        
+        _, unique_indices = np.unique(wq_vals, return_index=True)
+    
+        sort_idx = np.argsort(wq_vals[unique_indices])
+        unique_idx = unique_indices[sort_idx]
+    
+        wq_unique = wq_vals[unique_idx]
+        qq_unique = qq[unique_idx]
+    
+        wqf = interp1d(qq_unique, wq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
+        qw = interp1d(wq_unique, qq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
+    
+        def gc(w, qw):
+            q_vals = qw(w)
+            th_vals = th(q_vals)
+            y = 4/3 * (1 - np.sqrt(1 - 3/2 * th_vals))
+            y2 = 4/3 - 32/9 * 1/w
+            return np.where(w < 1e4, y, y2)
+        
         gca = gc(ww, qw)
+
     else:
+        def gc_simple(w):
+            return 0.63 * w ** 0.2
+            
         gca = gc_simple(ww)
 
     gcf0 = interp1d(ww, np.log(gca), kind='cubic', bounds_error=False, fill_value="extrapolate")

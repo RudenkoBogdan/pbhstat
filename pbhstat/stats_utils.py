@@ -10,7 +10,7 @@ def Erf(x):
     return -1 + vec_erfc(-x)
 
 # Initialize gcf
-def initialize_gcf(wmax):
+def initialize_gcf(wmax, simple=False):
     qq = np.geomspace(0.0001, wmax, 10000)
 
     def th(q):
@@ -43,7 +43,14 @@ def initialize_gcf(wmax):
         y2 = 4/3 - 32/9 * 1/w
         return np.where(w < 1e4, y, y2)
 
-    gca = gc(ww, qw)
+    def gc_simple(w):
+        return 0.63 * w ** 0.2
+
+    if simple == False:
+        gca = gc(ww, qw)
+    else:
+        gca = gc_simple(ww)
+
     gcf0 = interp1d(ww, np.log(gca), kind='cubic', bounds_error=False, fill_value="extrapolate")
 
     def gcf(w):

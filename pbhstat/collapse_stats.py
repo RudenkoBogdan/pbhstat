@@ -55,7 +55,7 @@ class PressSchechterModel:
 
         for i, mbh in enumerate(MPBH):
             integrand = self.beta_mh_integrand(MH_array, mbh, sigma_func)
-            fm_vals[i] = np.trapz(integrand, MH_array)
+            fm_vals[i] = np.trapezoid(integrand, MH_array)
 
         return MPBH, fm_vals
 
@@ -124,7 +124,7 @@ class PeaksTheoryModel:
         fm_vals = np.zeros_like(MPBH)
         for i, mbh in enumerate(MPBH):
             integrand_vals = beta_integrand(MH_array, mbh, sigma0f, sigma1f)
-            fm_vals[i] = np.trapz(integrand_vals, MH_array)
+            fm_vals[i] = np.trapezoid(integrand_vals, MH_array)
 
         return MPBH, fm_vals
 
@@ -209,7 +209,7 @@ class NonLinearModel:
 
         for j in tqdm.tqdm(range(len(MPBH_array)), desc="Evaluating NonLinearModel"):
             for i in range(len(MH_array)):
-                integrand_mh[i, j] = np.trapz(integrand_w(w_array, r_array[i], MPBH_array[j], MH_array[i], self.vcorr), w_array) + 1e-70
-            fm_vals[j] = np.trapz(integrand_mh[:, j], LMH)
+                integrand_mh[i, j] = np.trapezoid(integrand_w(w_array, r_array[i], MPBH_array[j], MH_array[i], self.vcorr), w_array) + 1e-70
+            fm_vals[j] = np.trapezoid(integrand_mh[:, j], LMH)
 
         return MPBH_array, fm_vals * np.sqrt(Meq)

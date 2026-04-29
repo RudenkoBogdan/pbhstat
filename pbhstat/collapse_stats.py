@@ -129,7 +129,7 @@ class PeaksTheoryModel:
         return MPBH, fm_vals
 
 class NonLinearModel:
-    def __init__(self, power_spectrum, mass_variance, K, gamma=0.36, vcorr=True):
+    def __init__(self, power_spectrum, mass_variance, K, gamma=0.36, vcorr=True, simple_gc=False):
         self.power_spectrum = power_spectrum
         self.mass_variance = mass_variance
         self.K = K
@@ -172,7 +172,7 @@ class NonLinearModel:
 
         w_array = np.geomspace(wmin, wmax, 4000)
 
-        gcf = initialize_gcf(wmax)
+        gcf = initialize_gcf(wmax, simple=simple_gc)
 
         def integrand_w(w, r, M, MH, vcorr=True):
             muj = M / (self.K * MH)

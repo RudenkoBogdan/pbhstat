@@ -22,9 +22,17 @@ def initialize_gcf(wmax):
         return q * th_vals * 4 * np.sqrt(1 - 3 / 2 * th_vals)
 
     wq_vals = wq(qq, th_vals)
+    
+    _, unique_indices = np.unique(wq_vals, return_index=True)
 
-    wqf = interp1d(qq, wq_vals, kind='cubic', bounds_error=False, fill_value="extrapolate")
-    qw = interp1d(wq_vals, qq, kind='cubic', bounds_error=False, fill_value="extrapolate")
+    sort_idx = np.argsort(wq_vals[unique_indices])
+    unique_idx = unique_indices[sort_idx]
+
+    wq_unique = wq_vals[unique_idx]
+    qq_unique = qq[unique_idx]
+
+    wqf = interp1d(qq_unique, wq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
+    qw = interp1d(wq_unique, qq_unique, kind='cubic', bounds_error=False, fill_value="extrapolate")
 
     ww = np.geomspace(0.0001, wmax, 10000)
 
